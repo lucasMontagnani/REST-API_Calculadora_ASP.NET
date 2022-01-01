@@ -47,7 +47,7 @@ namespace REST_API_Calculadora_ASP.NET.Repository.Implementations
         {
             if (!Exists(person.Id))
             {
-                return new Person();
+                return null;
             }
             var result = _context.Person_s.SingleOrDefault(p => p.Id.Equals(person.Id));
             if(result != null)
