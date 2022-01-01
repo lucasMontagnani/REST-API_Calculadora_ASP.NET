@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace REST_API_Calculadora_ASP.NET.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CalculatorController : ControllerBase
     {
         [HttpGet("sum/{firstNumber}/{secondNumber}")]
