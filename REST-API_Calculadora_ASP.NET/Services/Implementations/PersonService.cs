@@ -1,5 +1,6 @@
 ﻿using REST_API_Calculadora_ASP.NET.Context;
 using REST_API_Calculadora_ASP.NET.Models;
+using REST_API_Calculadora_ASP.NET.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,81 +10,35 @@ namespace REST_API_Calculadora_ASP.NET.Services.Implementations
 {
     public class PersonService : IPersonService
     {
-        private ApiDbContext _context;
-        public PersonService(ApiDbContext context)
+        private readonly IPersonRepository _repository;
+        public PersonService(IPersonRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public List<Person> FindAll()
         {
-            return _context.Person_s.ToList();
+            return _repository.FindAll();
         }
 
         public Person FindById(long id)
         {
-            return _context.Person_s.SingleOrDefault(p => p.Id.Equals(id));
+            return _repository.FindById(id);
         }
 
         public Person Create(Person person)
         {
-            try
-            {
-                _context.Add(person);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            return person;
+            return _repository.Create(person);
         }
 
         public Person Update(Person person)
         {
-            if (!Exists(person.Id))
-            {
-                return new Person();
-            }
-            var result = _context.Person_s.SingleOrDefault(p => p.Id.Equals(person.Id));
-            if(result != null)
-            {
-                try
-                {
-                    _context.Entry(result).CurrentValues.SetValues(person);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-            }           
-            return person;
+            return _repository.Update(person);
         }
 
         public void Delete(long id)
         {
-            var result = _context.Person_s.SingleOrDefault(p => p.Id.Equals(id));
-            if (result != null)
-            {
-                try
-                {
-                    _context.Person_s.Remove(result);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-            }
-        }
-
-        private bool Exists(long id)
-        {
-            return _context.Person_s.Any(p => p.Id.Equals(id));
+            _repository.Delete(id);
         }
     }
 }

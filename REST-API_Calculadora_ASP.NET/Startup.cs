@@ -9,6 +9,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using REST_API_Calculadora_ASP.NET.Context;
+using REST_API_Calculadora_ASP.NET.Repository;
+using REST_API_Calculadora_ASP.NET.Repository.Implementations;
+using REST_API_Calculadora_ASP.NET.Services;
 using REST_API_Calculadora_ASP.NET.Services.Implementations;
 using System;
 using System.Collections.Generic;
@@ -36,6 +39,7 @@ namespace REST_API_Calculadora_ASP.NET
 
             // Para Injeção de Dependencia
             services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];
             services.AddDbContext<ApiDbContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
