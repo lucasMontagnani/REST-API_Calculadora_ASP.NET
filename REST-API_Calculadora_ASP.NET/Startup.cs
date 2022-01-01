@@ -2,11 +2,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using REST_API_Calculadora_ASP.NET.Context;
 using REST_API_Calculadora_ASP.NET.Services.Implementations;
 using System;
 using System.Collections.Generic;
@@ -28,8 +30,16 @@ namespace REST_API_Calculadora_ASP.NET
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
+            //Para Versionamento da API
+            services.AddApiVersioning();
+
             // Para Injeção de Dependencia
             services.AddScoped<IPersonService, PersonService>();
+
+            var connection = Configuration["MySQLConnection:MySQLConnectionString"];
+            services.AddDbContext<ApiDbContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+            //services.AddDbContext<ApiDbContext>(options => options.UseMySql(connection)); //Esse n funciona mais
 
             services.AddSwaggerGen(c =>
             {

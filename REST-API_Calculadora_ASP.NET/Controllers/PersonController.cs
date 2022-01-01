@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace REST_API_Calculadora_ASP.NET.Controllers
 {
+    [ApiVersion("1")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class PersonController : ControllerBase
     {
         private readonly IPersonService _personService;
