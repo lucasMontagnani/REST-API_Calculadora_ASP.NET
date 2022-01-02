@@ -7,32 +7,28 @@ using System.Threading.Tasks;
 
 namespace REST_API_Calculadora_ASP.NET.Repository.Implementations
 {
-    //Controller roteia a requisição do client, e indica o método através da rota,
-    //o método invoca o Service(que cuida das regras de negíócio),
-    //e este chama o Repository(que cuida do acesso ao banco de dados por meio do Context)
-    public class PersonRepository : IPersonRepository
+    public class BookRepository : IBookRepository
     {
         private readonly ApiDbContext _context;
-        public PersonRepository(ApiDbContext context)
+        public BookRepository(ApiDbContext context)
         {
             _context = context;
         }
-
-        public List<Person> FindAll()
+        public List<Book> FindAll()
         {
-            return _context.Person_s.ToList();
+            return _context.Books.ToList();
         }
 
-        public Person FindById(long id)
+        public Book FindById(long id)
         {
-            return _context.Person_s.SingleOrDefault(p => p.Id.Equals(id));
+            return _context.Books.SingleOrDefault(b => b.Id.Equals(id));
         }
 
-        public Person Create(Person person)
+        public Book Create(Book book)
         {
             try
             {
-                _context.Add(person);
+                _context.Books.Add(book); // N esquece isso aqui
                 _context.SaveChanges();
             }
             catch (Exception)
@@ -40,21 +36,21 @@ namespace REST_API_Calculadora_ASP.NET.Repository.Implementations
 
                 throw;
             }
-            return person;
+            return book;
         }
 
-        public Person Update(Person person)
+        public Book Update(Book book)
         {
-            if (!Exists(person.Id))
+            if (!Exists(book.Id))
             {
                 return null;
             }
-            var result = _context.Person_s.SingleOrDefault(p => p.Id.Equals(person.Id));
-            if(result != null)
+            var result = _context.Books.SingleOrDefault(b => b.Id.Equals(book.Id));
+            if (result != null)
             {
                 try
                 {
-                    _context.Entry(result).CurrentValues.SetValues(person);
+                    _context.Entry(result).CurrentValues.SetValues(book);
                     _context.SaveChanges();
                 }
                 catch (Exception)
@@ -62,18 +58,18 @@ namespace REST_API_Calculadora_ASP.NET.Repository.Implementations
 
                     throw;
                 }
-            }           
-            return person;
+            }
+            return book;
         }
 
         public void Delete(long id)
         {
-            var result = _context.Person_s.SingleOrDefault(p => p.Id.Equals(id));
+            var result = _context.Books.SingleOrDefault(b => b.Id.Equals(id));
             if (result != null)
             {
                 try
                 {
-                    _context.Person_s.Remove(result);
+                    _context.Books.Remove(result);
                     _context.SaveChanges();
                 }
                 catch (Exception)
@@ -86,7 +82,7 @@ namespace REST_API_Calculadora_ASP.NET.Repository.Implementations
 
         private bool Exists(long id)
         {
-            return _context.Person_s.Any(p => p.Id.Equals(id));
+            return _context.Books.Any(b => b.Id.Equals(id));
         }
     }
 }

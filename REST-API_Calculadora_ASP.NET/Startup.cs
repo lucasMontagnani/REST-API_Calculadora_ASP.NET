@@ -45,6 +45,9 @@ namespace REST_API_Calculadora_ASP.NET
             // Para Injeção de Dependencia
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IBookRepository, BookRepository>();
+
 
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];
             services.AddDbContext<ApiDbContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));

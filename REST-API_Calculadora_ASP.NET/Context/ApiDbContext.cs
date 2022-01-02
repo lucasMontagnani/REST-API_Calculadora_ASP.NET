@@ -17,6 +17,7 @@ namespace REST_API_Calculadora_ASP.NET.Context
         }
 
         public DbSet<Person> Person_s { get; set; }
+        public DbSet<Book> Books { get; set; }
 
     }
 }
