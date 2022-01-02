@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using REST_API_Calculadora_ASP.NET.Context;
 using REST_API_Calculadora_ASP.NET.Repository;
+using REST_API_Calculadora_ASP.NET.Repository.Generic;
 using REST_API_Calculadora_ASP.NET.Repository.Implementations;
 using REST_API_Calculadora_ASP.NET.Services;
 using REST_API_Calculadora_ASP.NET.Services.Implementations;
@@ -44,9 +45,10 @@ namespace REST_API_Calculadora_ASP.NET
 
             // Para Injeção de Dependencia
             services.AddScoped<IPersonService, PersonService>();
-            services.AddScoped<IPersonRepository, PersonRepository>();
+            //services.AddScoped<IPersonRepository, PersonRepository>(); // -- Repositorio aposentado, pois GenericRepository foi implementado
             services.AddScoped<IBookService, BookService>();
-            services.AddScoped<IBookRepository, BookRepository>();
+            //services.AddScoped<IBookRepository, BookRepository>(); // -- Repositorio aposentado, pois GenericRepository foi implementado
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];

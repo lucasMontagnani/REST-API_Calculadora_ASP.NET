@@ -1,6 +1,7 @@
 ﻿using REST_API_Calculadora_ASP.NET.Context;
 using REST_API_Calculadora_ASP.NET.Models;
 using REST_API_Calculadora_ASP.NET.Repository;
+using REST_API_Calculadora_ASP.NET.Repository.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace REST_API_Calculadora_ASP.NET.Services.Implementations
 {
     public class PersonService : IPersonService
     {
-        private readonly IPersonRepository _repository;
-        public PersonService(IPersonRepository repository)
+        private readonly IGenericRepository<Person> _repository;
+        public PersonService(IGenericRepository<Person> repository)
         {
             _repository = repository;
         }

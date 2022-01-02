@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace REST_API_Calculadora_ASP.NET.Repository
 {
+    // Interface aposentada, pois IGenericRepository foi implementada
+    /*
     public interface IBookRepository
     {
         Book Create(Book book);
@@ -14,4 +16,5 @@ namespace REST_API_Calculadora_ASP.NET.Repository
         Book Update(Book book);
         void Delete(long id);
     }
+    */
 }

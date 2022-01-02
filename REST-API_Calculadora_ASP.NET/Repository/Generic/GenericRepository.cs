@@ -1,87 +1,86 @@
-﻿using REST_API_Calculadora_ASP.NET.Context;
-using REST_API_Calculadora_ASP.NET.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using REST_API_Calculadora_ASP.NET.Context;
+using REST_API_Calculadora_ASP.NET.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace REST_API_Calculadora_ASP.NET.Repository.Implementations
+namespace REST_API_Calculadora_ASP.NET.Repository.Generic
 {
     //Controller roteia a requisição do client, e indica o método através da rota,
     //o método invoca o Service(que cuida das regras de negíócio),
     //e este chama o Repository(que cuida do acesso ao banco de dados por meio do Context)
-
-    // Repositorio aposentado, pois GenericRepository foi implementado
-    /*
-    public class PersonRepository : IPersonRepository
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         private readonly ApiDbContext _context;
-        public PersonRepository(ApiDbContext context)
+        private DbSet<T> dataset;
+        public GenericRepository(ApiDbContext context)
         {
             _context = context;
+            dataset = _context.Set<T>();
         }
 
-        public List<Person> FindAll()
+        public List<T> FindAll()
         {
-            return _context.Person_s.ToList();
+            return dataset.ToList();
         }
 
-        public Person FindById(long id)
+        public T FindById(long id)
         {
-            return _context.Person_s.SingleOrDefault(p => p.Id.Equals(id));
+            return dataset.SingleOrDefault(p => p.Id.Equals(id));
         }
 
-        public Person Create(Person person)
+        public T Create(T entity)
         {
             try
             {
-                _context.Add(person);
+                dataset.Add(entity);
                 _context.SaveChanges();
+                return entity;
             }
             catch (Exception)
             {
-
                 throw;
-            }
-            return person;
+            }  
         }
 
-        public Person Update(Person person)
+        public T Update(T entity)
         {
-            if (!Exists(person.Id))
-            {
-                return null;
-            }
-            var result = _context.Person_s.SingleOrDefault(p => p.Id.Equals(person.Id));
-            if(result != null)
+            var result = dataset.SingleOrDefault(p => p.Id.Equals(entity.Id));
+            if (result != null)
             {
                 try
                 {
-                    _context.Entry(result).CurrentValues.SetValues(person);
+                    _context.Entry(result).CurrentValues.SetValues(entity);
                     _context.SaveChanges();
+                    return entity;
                 }
                 catch (Exception)
                 {
 
                     throw;
                 }
-            }           
-            return person;
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public void Delete(long id)
         {
-            var result = _context.Person_s.SingleOrDefault(p => p.Id.Equals(id));
+            var result = dataset.SingleOrDefault(p => p.Id.Equals(id));
             if (result != null)
             {
                 try
                 {
-                    _context.Person_s.Remove(result);
+                    dataset.Remove(result);
                     _context.SaveChanges();
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }
@@ -89,8 +88,7 @@ namespace REST_API_Calculadora_ASP.NET.Repository.Implementations
 
         private bool Exists(long id)
         {
-            return _context.Person_s.Any(p => p.Id.Equals(id));
+            return dataset.Any(p => p.Id.Equals(id));
         }
     }
-    */
 }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace REST_API_Calculadora_ASP.NET.Repository.Implementations
 {
+    // Repositorio aposentado, pois GenericRepository foi implementado
+    /*
     public class BookRepository : IBookRepository
     {
         private readonly ApiDbContext _context;
@@ -85,4 +87,5 @@ namespace REST_API_Calculadora_ASP.NET.Repository.Implementations
             return _context.Books.Any(b => b.Id.Equals(id));
         }
     }
+    */
 }

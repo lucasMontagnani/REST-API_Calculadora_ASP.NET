@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace REST_API_Calculadora_ASP.NET.Repository
 {
+    // Interface aposentada, pois IGenericRepository foi implementada
+    /*
     public interface IPersonRepository
     {
         Person Create(Person person);
@@ -15,4 +17,5 @@ namespace REST_API_Calculadora_ASP.NET.Repository
         void Delete(long id);
 
     }
+    */
 }

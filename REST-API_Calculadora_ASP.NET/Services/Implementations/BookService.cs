@@ -1,5 +1,6 @@
 ﻿using REST_API_Calculadora_ASP.NET.Models;
 using REST_API_Calculadora_ASP.NET.Repository;
+using REST_API_Calculadora_ASP.NET.Repository.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace REST_API_Calculadora_ASP.NET.Services.Implementations
 {
     public class BookService : IBookService
     {
-        private readonly IBookRepository _repository;
-        public BookService(IBookRepository repository)
+        private readonly IGenericRepository<Book> _repository;
+        public BookService(IGenericRepository<Book> repository)
         {
             _repository = repository;
         }
