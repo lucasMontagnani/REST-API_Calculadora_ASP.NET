@@ -1,4 +1,5 @@
-﻿using REST_API_Calculadora_ASP.NET.Models;
+﻿using REST_API_Calculadora_ASP.NET.Data.VO;
+using REST_API_Calculadora_ASP.NET.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,10 @@ namespace REST_API_Calculadora_ASP.NET.Services
 {
     public interface IPersonService
     {
-        Person Create(Person person);
-        Person FindById(long id);
-        List<Person> FindAll();
-        Person Update(Person person);
+        PersonVO Create(PersonVO person);
+        PersonVO FindById(long id);
+        List<PersonVO> FindAll();
+        PersonVO Update(PersonVO person);
         void Delete(long id);
 
     }

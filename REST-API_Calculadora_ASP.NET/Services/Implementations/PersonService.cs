@@ -1,4 +1,6 @@
 ﻿using REST_API_Calculadora_ASP.NET.Context;
+using REST_API_Calculadora_ASP.NET.Data.Converter.Implementation;
+using REST_API_Calculadora_ASP.NET.Data.VO;
 using REST_API_Calculadora_ASP.NET.Models;
 using REST_API_Calculadora_ASP.NET.Repository;
 using REST_API_Calculadora_ASP.NET.Repository.Generic;
@@ -12,29 +14,35 @@ namespace REST_API_Calculadora_ASP.NET.Services.Implementations
     public class PersonService : IPersonService
     {
         private readonly IGenericRepository<Person> _repository;
+        private readonly PersonConverter _converter;
         public PersonService(IGenericRepository<Person> repository)
         {
             _repository = repository;
+            _converter = new PersonConverter();
         }
 
-        public List<Person> FindAll()
+        public List<PersonVO> FindAll()
         {
-            return _repository.FindAll();
+            return _converter.Parse(_repository.FindAll());
         }
 
-        public Person FindById(long id)
+        public PersonVO FindById(long id)
         {
-            return _repository.FindById(id);
+            return _converter.Parse(_repository.FindById(id));
         }
 
-        public Person Create(Person person)
+        public PersonVO Create(PersonVO person)
         {
-            return _repository.Create(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Create(personEntity);
+            return _converter.Parse(personEntity);
         }
 
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            return _repository.Update(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Update(personEntity);
+            return _converter.Parse(personEntity);
         }
 
         public void Delete(long id)

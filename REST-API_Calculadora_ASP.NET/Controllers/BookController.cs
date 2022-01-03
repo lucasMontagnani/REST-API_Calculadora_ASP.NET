@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using REST_API_Calculadora_ASP.NET.Data.VO;
 using REST_API_Calculadora_ASP.NET.Models;
 using REST_API_Calculadora_ASP.NET.Services;
 using System;
@@ -38,7 +39,7 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Book book)
+        public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null)
             {
@@ -48,7 +49,7 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Book book)
+        public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null)
             {
