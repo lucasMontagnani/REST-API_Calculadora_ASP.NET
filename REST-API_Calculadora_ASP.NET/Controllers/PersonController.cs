@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using REST_API_Calculadora_ASP.NET.Data.VO;
+using REST_API_Calculadora_ASP.NET.Hypermedia.Filters;
 using REST_API_Calculadora_ASP.NET.Models;
 using REST_API_Calculadora_ASP.NET.Services;
 using REST_API_Calculadora_ASP.NET.Services.Implementations;
@@ -23,12 +24,14 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_personService.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var person = _personService.FindById(id);
@@ -40,6 +43,7 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null)
@@ -50,6 +54,7 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null)

@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using REST_API_Calculadora_ASP.NET.Context;
+using REST_API_Calculadora_ASP.NET.Hypermedia.Enricher;
+using REST_API_Calculadora_ASP.NET.Hypermedia.Filters;
 using REST_API_Calculadora_ASP.NET.Repository;
 using REST_API_Calculadora_ASP.NET.Repository.Generic;
 using REST_API_Calculadora_ASP.NET.Repository.Implementations;
@@ -39,6 +41,10 @@ namespace REST_API_Calculadora_ASP.NET
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+            services.AddSingleton(filterOptions);
             
             //Para Versionamento da API
             services.AddApiVersioning();
@@ -85,6 +91,7 @@ namespace REST_API_Calculadora_ASP.NET
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
             });
         }
 
