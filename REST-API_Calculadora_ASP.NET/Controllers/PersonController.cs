@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using REST_API_Calculadora_ASP.NET.Data.VO;
 using REST_API_Calculadora_ASP.NET.Hypermedia.Filters;
 using REST_API_Calculadora_ASP.NET.Models;
@@ -13,6 +14,7 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
+    //[Authorize("Bearer")]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class PersonController : ControllerBase
     {
