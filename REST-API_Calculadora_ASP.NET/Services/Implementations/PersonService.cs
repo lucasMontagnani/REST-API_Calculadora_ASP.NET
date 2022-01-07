@@ -31,7 +31,10 @@ namespace REST_API_Calculadora_ASP.NET.Services.Implementations
         {
             return _converter.Parse(_repository.FindById(id));
         }
-
+        public List<PersonVO> FindByName(string firstName, string lastName)
+        {
+            return _converter.Parse(_repository.FindByName(firstName, lastName));
+        }
         public PersonVO Create(PersonVO person)
         {
             var personEntity = _converter.Parse(person);
@@ -55,5 +58,7 @@ namespace REST_API_Calculadora_ASP.NET.Services.Implementations
         {
             _repository.Delete(id);
         }
+
+        
     }
 }

@@ -44,6 +44,18 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
             return Ok(person);
         }
 
+        [HttpGet("findPersonByName")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Get([FromQuery] string firstName, [FromQuery] string lastName)
+        {
+            var person = _personService.FindByName(firstName, lastName);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            return Ok(person);
+        }
+
         [HttpPost]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
