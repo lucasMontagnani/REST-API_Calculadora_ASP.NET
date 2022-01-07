@@ -106,6 +106,7 @@ namespace REST_API_Calculadora_ASP.NET
             services.AddScoped<ILoginService, LoginService>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
 
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];

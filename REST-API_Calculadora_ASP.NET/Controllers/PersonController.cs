@@ -66,6 +66,14 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
             return Ok(_personService.Update(person));
         }
 
+        [HttpPatch("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Patch(long id)
+        {
+            var person = _personService.Disable(id);
+            return Ok(person);
+        }
+
         [HttpDelete]
         public IActionResult Delete(long id)
         {

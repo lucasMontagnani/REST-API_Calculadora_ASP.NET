@@ -13,9 +13,10 @@ namespace REST_API_Calculadora_ASP.NET.Services.Implementations
 {
     public class PersonService : IPersonService
     {
-        private readonly IGenericRepository<Person> _repository;
+        //private readonly IGenericRepository<Person> _repository;
+        private readonly IPersonRepository _repository;
         private readonly PersonConverter _converter;
-        public PersonService(IGenericRepository<Person> repository)
+        public PersonService(IPersonRepository repository)
         {
             _repository = repository;
             _converter = new PersonConverter();
@@ -42,6 +43,11 @@ namespace REST_API_Calculadora_ASP.NET.Services.Implementations
         {
             var personEntity = _converter.Parse(person);
             personEntity = _repository.Update(personEntity);
+            return _converter.Parse(personEntity);
+        }
+        public PersonVO Disable(long id)
+        {
+            var personEntity = _repository.Disable(id);
             return _converter.Parse(personEntity);
         }
 

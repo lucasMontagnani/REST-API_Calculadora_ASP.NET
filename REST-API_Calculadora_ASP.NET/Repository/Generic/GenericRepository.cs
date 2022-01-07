@@ -13,7 +13,7 @@ namespace REST_API_Calculadora_ASP.NET.Repository.Generic
     //e este chama o Repository(que cuida do acesso ao banco de dados por meio do Context)
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        private readonly ApiDbContext _context;
+        protected readonly ApiDbContext _context;
         private DbSet<T> dataset;
         public GenericRepository(ApiDbContext context)
         {

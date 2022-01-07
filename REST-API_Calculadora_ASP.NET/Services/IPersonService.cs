@@ -13,6 +13,7 @@ namespace REST_API_Calculadora_ASP.NET.Services
         PersonVO FindById(long id);
         List<PersonVO> FindAll();
         PersonVO Update(PersonVO person);
+        PersonVO Disable(long id);
         void Delete(long id);
 
     }
