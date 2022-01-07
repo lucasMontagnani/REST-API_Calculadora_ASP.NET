@@ -32,6 +32,17 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
             return Ok(_personService.FindAll());
         }
 
+        [HttpGet("{sortDirection}/{pageSize}/{page}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Get(
+            [FromQuery] string name,
+            string sortDirection,
+            int pageSize,
+            int page)
+        {
+            return Ok(_personService.FindWithPagedSearch(name, sortDirection, pageSize, page));
+        }
+
         [HttpGet("{id}")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)

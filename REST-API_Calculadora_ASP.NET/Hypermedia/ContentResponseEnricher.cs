@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Routing;
 using REST_API_Calculadora_ASP.NET.Hypermedia.Abstract;
+using REST_API_Calculadora_ASP.NET.Pagination;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace REST_API_Calculadora_ASP.NET.Hypermedia
@@ -17,7 +19,7 @@ namespace REST_API_Calculadora_ASP.NET.Hypermedia
         }
         public virtual bool CanEnrich(Type contentType)
         {
-            return contentType == typeof(T) || contentType == typeof(List<T>);
+            return contentType == typeof(T) || contentType == typeof(List<T>) || contentType == typeof(PagedSearchVO<T>);
         }
 
         protected abstract Task EnrichModel(T content, IUrlHelper urlHelper);
@@ -43,6 +45,13 @@ namespace REST_API_Calculadora_ASP.NET.Hypermedia
                 {
                     ConcurrentBag<T> bag = new ConcurrentBag<T>(collection);
                     Parallel.ForEach(bag, (element) =>
+                    {
+                        EnrichModel(element, urlHelper);
+                    });
+                }
+                else if (okObjectResult.Value is PagedSearchVO<T> pagedSearch)
+                {
+                    Parallel.ForEach(pagedSearch.List.ToList(), (element) =>
                     {
                         EnrichModel(element, urlHelper);
                     });
