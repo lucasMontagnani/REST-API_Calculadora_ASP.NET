@@ -2,5 +2,9 @@
 [em construção]
 
 ### 📷 Demonstração da aplicação
-<img alt="AutorizaController" src="/readme_images/pAuthentication.JPG"/>
-<img alt="Controllers" src="/readme_images/pControllers.JPG"/>
+<img alt="AuthenticationController" src="/readme_images/AuthenticationController.JPG"/>
+<img alt="PersonController" src="/readme_images/PersonController.JPG"/>
+<img alt="BookController" src="/readme_images/BookController.JPG"/>
+<img alt="FileController" src="/readme_images/FileController.JPG"/>
+<img alt="CalculatorController" src="/readme_images/CalculatorController.JPG"/>
+
