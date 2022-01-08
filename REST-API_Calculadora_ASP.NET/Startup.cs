@@ -91,6 +91,7 @@ namespace REST_API_Calculadora_ASP.NET
 
             services.AddControllers();
 
+            // HATEOAS filter definitions
             var filterOptions = new HyperMediaFilterOptions();
             filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
             services.AddSingleton(filterOptions);
