@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -97,7 +98,8 @@ namespace REST_API_Calculadora_ASP.NET
             //Para Versionamento da API
             services.AddApiVersioning();
 
-            // Para Injeção de Dependencia
+            //Injeção de Dependencia
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IPersonService, PersonService>();
             //services.AddScoped<IPersonRepository, PersonRepository>(); // -- Repositorio aposentado, pois GenericRepository foi implementado
             services.AddScoped<IBookService, BookService>();
@@ -107,6 +109,7 @@ namespace REST_API_Calculadora_ASP.NET
             services.AddTransient<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IFileService, FileService>();
 
 
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];
