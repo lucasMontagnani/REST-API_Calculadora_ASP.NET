@@ -1,4 +1,6 @@
-﻿using System;
+﻿using REST_API_Calculadora_ASP.NET.Hypermedia;
+using REST_API_Calculadora_ASP.NET.Hypermedia.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace REST_API_Calculadora_ASP.NET.Data.VO
 {
-    public class BookVO
+    public class BookVO : ISupportHyperMedia
     {
         //[JsonPropertyName("Identifier")] // Serialização: Serve como um Label para os campos dos atributos quando no Endpoint
         public long Id { get; set; }
@@ -18,5 +20,6 @@ namespace REST_API_Calculadora_ASP.NET.Data.VO
         public decimal Price { get; set; }
         //[JsonPropertyName("Book's Tittle")]
         public string Title { get; set; }
+        public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
     }
 }

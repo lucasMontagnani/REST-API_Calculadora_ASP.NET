@@ -23,10 +23,14 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
             _bookService = bookService;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{sortDirection}/{pageSize}/{page}")]
+        public IActionResult Get(
+            [FromQuery] string title,
+            string sortDirection,
+            int pageSize,
+            int page)
         {
-            return Ok(_bookService.FindAll());
+            return Ok(_bookService.FindWithPagedSearch(title, sortDirection, pageSize, page));
         }
 
         [HttpGet("{id}")]
