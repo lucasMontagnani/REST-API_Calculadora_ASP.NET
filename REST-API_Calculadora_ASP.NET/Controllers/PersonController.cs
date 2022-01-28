@@ -97,7 +97,7 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
             return Ok(person);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public IActionResult Delete(long id)
         {
             _personService.Delete(id);

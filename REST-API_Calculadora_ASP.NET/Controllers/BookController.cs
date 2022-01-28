@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using REST_API_Calculadora_ASP.NET.Data.VO;
 using REST_API_Calculadora_ASP.NET.Models;
@@ -24,6 +25,11 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
         }
 
         [HttpGet("{sortDirection}/{pageSize}/{page}")]
+        [ProducesResponseType(typeof(BookVO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Get(
             [FromQuery] string title,
             string sortDirection,
@@ -34,6 +40,11 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(BookVO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Get(long id)
         {
             var person = _bookService.FindById(id);
@@ -45,6 +56,11 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(BookVO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null)
@@ -55,6 +71,11 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(BookVO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null)
@@ -64,7 +85,13 @@ namespace REST_API_Calculadora_ASP.NET.Controllers
             return Ok(_bookService.Update(book));
         }
 
-        [HttpDelete]
+
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(typeof(BookVO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Delete(long id)
         {
             _bookService.Delete(id);
