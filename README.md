@@ -1,5 +1,5 @@
 # API_Calculadora_ASP.NET_Core
-[em construção]
+ASP.NET Web API que apesar do nome não se trata apenas de uma calculadora, contando com Controllers genéricos para Models de pessoas e livros, além de gerenciamento de arquivos. Pode ser considerada RESTful, contando também com autenticação por JWT Token e padrões de projeto como Repository e Business/Services. 
 
 ### 📷 Demonstração da aplicação
 <img alt="AuthenticationController" src="/readme_images/AuthenticationController.JPG"/>
